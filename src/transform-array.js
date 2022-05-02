@@ -15,17 +15,24 @@ const { NotImplementedError } = require('../extensions/index.js');
  */
 function transform(arr) {
    let stack = [];
+   if (!Array.isArray(arr)) {
+      throw new Error("'arr' parameter must be an instance of the Array!");
+   }
    for (let i = 0; i < arr.length; i++) {
       if (arr[i] === '--discard-next') {
-         i++;
+         if (arr[i + 1] !== undefined) {
+            i++;
+         }
       } else if (arr[i] === '--discard-prev') {
-         if (arr[i - 2] !== '--discard-next' && arr[i - 1] !== '--discard-next') {
+         if (arr[i - 2] !== '--discard-next' && arr[i - 1] !== undefined) {
             stack.pop();
          }
       } else if (arr[i] === '--double-next') {
-         stack.push(arr[i + 1]);
+         if (arr[i + 1] !== undefined) {
+            stack.push(arr[i + 1]);
+         }
       } else if (arr[i] === '--double-prev') {
-         if (arr[i - 2] !== '--discard-next') {
+         if (arr[i - 2] !== '--discard-next' && arr[i - 1] !== undefined) {
             stack.push(stack[stack.length - 1]);
          }
       } else {
