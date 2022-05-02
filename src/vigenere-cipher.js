@@ -23,9 +23,6 @@ class VigenereCipheringMachine {
    encrypt(message, key) {
       if (!message || !key) {
          throw new Error("Incorrect arguments!");
-         constructor(type = true) {
-            this.isDirect = type
-         }
       }
       throw new NotImplementedError('Not implemented');
       // remove line with error and write your code here
