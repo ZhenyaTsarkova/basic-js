@@ -10,25 +10,29 @@ let err = '';
 const chainMaker = {
    getLength() {
       return stack.length;
-      // remove line with error and write your code here
    },
    addLink(value) {
-      if (!value) {
+      if (value === null) {
+         stack.push('null')
+      } else if (value === 0) {
+         stack.push('0')
+      } else if (!value) {
          stack.push('')
-      } else {
+      }
+      else {
          value = value + '';
          stack.push(value);
       }
-      // remove line with error and write your code here
+      return chainMaker;
    },
    removeLink(position) {
       if (position !== Number(position) || !stack[position]) { err === "You can't remove incorrect link!" }
-      else { stack.splice(position, 1) }
-      // remove line with error and write your code here
+      else { stack.splice(position - 1, 1) }
+      return chainMaker;
    },
    reverseChain() {
       stack.reverse();
-      // remove line with error and write your code here
+      return chainMaker;
    },
    finishChain() {
       if (err === "You can't remove incorrect link!") {
@@ -39,7 +43,6 @@ const chainMaker = {
          }
          return stack.join('~~');
       }
-      // remove line with error and write your code here
    }
 };
 

@@ -24,15 +24,11 @@ class VigenereCipheringMachine {
       if (!message || !key) {
          throw new Error("Incorrect arguments!");
       }
-      throw new NotImplementedError('Not implemented');
-      // remove line with error and write your code here
    }
    decrypt(encryptedMessage, key) {
       if (!encryptedMessage || !key) {
          throw new Error("Incorrect arguments!");
       }
-      throw new NotImplementedError('Not implemented');
-      // remove line with error and write your code here
    }
 }
 
