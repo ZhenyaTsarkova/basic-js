@@ -16,21 +16,34 @@ const { NotImplementedError } = require('../extensions/index.js');
  *
  */
 function renameFiles(names) {
+   if (!names) {
+      throw new NotImplementedError('Not implemented');
+   }
    let stack = [];
-   stack.push(names[0]);
-   function getSuffix(name) {
-      for (let i = 1; i < names.length; i++) {
-         if (!stack.includes(`${name}(${i})`)) { stack.push(`${names[1]}(${i})`); }
+   let obj = {};
+   if (names.length) {
+      obj[names[0]] = 1;
+      stack.push(names[0]);
+   }
+
+   for (let i = 1; i < names.length; i++) {
+      if (!stack.includes(names[i])) {
+         stack.push(names[i]);
+         obj[names[i]] = 1;
+      } else {
+         for (key in obj) {
+            if (key === names[i]) {
+               obj[key]++;
+               stack.push(key + '(' + (obj[key] - 1) + ')');
+               obj[key + '(' + (obj[key] - 1) + ')'] = 1;
+               break
+            }
+         }
       }
    }
-   for (let j = 0; j < names.length; j++) {
-      if (stack.includes(names[j])) {
-         getSuffix(names[j]);
-      }
-   }
-   throw new NotImplementedError('Not implemented');
-   // remove line with error and write your code here
+   return stack;
 }
+// remove line with error and write your code here
 
 module.exports = {
    renameFiles

@@ -17,19 +17,19 @@ class DepthCalculator {
       let stack = [];
       let depth = 1;
       function getDepth(array) {
+         let k = true;
          for (let i = 0; i < array.length; i++) {
             if (Array.isArray(array[i])) {
-               depth++;
+               if (k === true) {
+                  depth++
+               }
                getDepth(array[i]);
-            } else {
-               stack.push(depth);
-               depth = 1;
+               k = false;
             }
          }
       }
       getDepth(arr);
-      stack.sort();
-      throw new NotImplementedError('Not implemented');
+      return depth;
       // remove line with error and write your code here
    }
 }
